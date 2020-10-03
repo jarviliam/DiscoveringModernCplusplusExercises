@@ -1,5 +1,12 @@
-#include <stdlib.h>
+/*
+Write a stack implementation for a generic value type. The maximal size of the stack is
+defined in the class (hard-wired).
+*/
+
+
+#include <stdexcept>
 #include <cassert>
+#include <iostream>
 #include <vector>
 
 template <typename T>
@@ -8,39 +15,58 @@ private:
 	int maxSize = 5;
 	std::vector<T> cap;
 public:
-
-	stacker() {
+	Stacker() {
+		cap.reserve(maxSize);
 	}
-	~stacker() {
+	~Stacker() {
 	}
 	T top() {
-		return cap.back;
+		if (!empty()) {
+			return cap.back();
+		}
 	}
 	void pop() {
 		if (!empty()) {
 			cap.pop_back();
+		}
+		else {
+			throw std::underflow_error("No Entries BRO!");
 		}
 	}
 	void push(T val) {
 		if (!full()) {
 			cap.push_back(val);
 		}
+		else {
+			throw std::overflow_error("MAN YOU PUT TOO MUCH IN HERE");
+		}
 	}
 	void clear() {
 		cap.clear();
 	}
-	int size() {
-		return cap.size;
+	std::size_t size() {
+		return cap.size();
 	}
 	bool full() {
-		return cap.size == maxSize;
+		return cap.size() == maxSize;
 	}
 	bool empty() {
-		return cap.size == 0;
+		return cap.size() == 0;
 	}
 };
 
 int main() {
+	Stacker<int> s;
+	assert(s.size() == 0);
+	assert(s.full() == false);
+	for (int i = 0; i < 5; ++i) {
+		s.push(i);
+		assert(s.top() == i);
+	}
+	assert(s.full() == true);
 
-	Stacker s = Stacker();
+	for (int i = 0; i < 5; ++i) {
+		s.pop();
+	}
+	assert(s.empty() == true);
 }

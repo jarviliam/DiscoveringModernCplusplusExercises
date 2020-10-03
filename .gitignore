@@ -1,3 +1,6 @@
 ./out
 ./output
 ./CMakeSettings.json
+/.vs
+/out/build
+/output/ch3
