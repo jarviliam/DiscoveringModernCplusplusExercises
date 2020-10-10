@@ -1,0 +1,1 @@
+add_executable(ex2.8.2 poly2.cpp)
