@@ -1,0 +1,1 @@
+add_executable(ex3.11.6 odditr.h oddrange.cpp)
