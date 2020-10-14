@@ -1,0 +1,1 @@
+add_executable(ex4.8.1 magnitude.cpp)
